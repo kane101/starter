@@ -17,7 +17,7 @@ function scssTask() {
         .pipe(dest('assets/css', { sourcemaps: '.' }));
 }
 
-function BrowserSync(cb) {
+function browserSyncServe(cb) {
     sync.init({
         server: {
             baseDir: './',
@@ -36,4 +36,4 @@ function watchTask() {
     watch(['assets/scss/**/*.scss'], series(scssTask, browserSyncReload));
 }
 
-exports.default = series(scssTask, BrowserSync, watchTask);
+exports.default = series(scssTask, browserSyncServe, watchTask);
