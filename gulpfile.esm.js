@@ -6,11 +6,13 @@ import autoprefixer from 'autoprefixer';
 import postcss from 'gulp-postcss';
 import browserSync from 'browser-sync';
 import rename from 'gulp-rename';
+import plumber from 'gulp-plumber';
 const sync = browserSync.create();
 const sass = gulpSass(dartSass);
 
 function scssTask() {
     return src('assets/scss/main.scss', { sourcemaps: true })
+        .pipe(plumber())
         .pipe(sass())
         .pipe(postcss([autoprefixer, cssnano]))
         .pipe(rename({ suffix: '.min' }))
